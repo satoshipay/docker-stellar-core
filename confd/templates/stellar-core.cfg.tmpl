@@ -1,0 +1,163 @@
+LOG_FILE_PATH="{{getenv "LOG_FILE_PATH"}}"
+
+BUCKET_DIR_PATH="/data/buckets"
+
+DATABASE="{{getenv "DATABASE"}}"
+
+HTTP_PORT=11626
+
+PUBLIC_HTTP_PORT=true
+
+HTTP_MAX_CLIENT={{getenv "HTTP_MAX_CLIENT"}}
+
+{{if (getenv "COMMANDS")}}
+COMMANDS=[{{$commands := split (getenv "COMMANDS") ","}}
+{{range $index,$command := $commands}}{{if $index}},
+{{end}}"{{.}}"{{end}}
+]
+{{end}}
+
+{{if (getenv "PREFERRED_UPGRADE_DATETIME")}}
+PREFERRED_UPGRADE_DATETIME={{getenv "PREFERRED_UPGRADE_DATETIME"}}
+{{end}}
+
+{{if (getenv "NODE_NAMES")}}
+NODE_NAMES=[{{$names := split (getenv "NODE_NAMES") ","}}
+{{range $index,$name := $names}}{{if $index}},
+{{end}}"{{.}}"{{end}}
+]
+{{end}}
+
+NETWORK_PASSPHRASE="{{getenv "NETWORK_PASSPHRASE"}}"
+
+PEER_PORT=11625
+
+{{if (getenv "TARGET_PEER_CONNECTIONS")}}
+TARGET_PEER_CONNECTIONS={{getenv "TARGET_PEER_CONNECTIONS"}}
+{{end}}
+
+{{if (getenv "MAX_PEER_CONNECTIONS")}}
+MAX_PEER_CONNECTIONS={{getenv "MAX_PEER_CONNECTIONS"}}
+{{end}}
+
+{{if (getenv "PREFERRED_PEERS")}}
+PREFERRED_PEERS=[{{$peers := split (getenv "PREFERRED_PEERS") ","}}
+{{range $index,$peer := $peers}}{{if $index}},
+{{end}}"{{.}}"{{end}}
+]
+{{end}}
+
+{{if (getenv "PREFERRED_PEER_KEYS")}}
+PREFERRED_PEER_KEYS=[{{$peer_keys := split (getenv "PREFERRED_PEER_KEYS") ","}}
+{{range $index,$peer_key := $peer_keys}}{{if $index}},
+{{end}}"{{.}}"{{end}}
+]
+{{end}}
+
+{{if (getenv "PREFERRED_PEERS_ONLY")}}
+PREFERRED_PEERS_ONLY={{getenv "PREFERRED_PEERS_ONLY"}}
+{{end}}
+
+{{if (getenv "MINIMUM_IDLE_PERCENT")}}
+MINIMUM_IDLE_PERCENT={{getenv "MINIMUM_IDLE_PERCENT"}}
+{{end}}
+
+{{if (getenv "KNOWN_PEERS")}}
+KNOWN_PEERS=[{{$peers := split (getenv "KNOWN_PEERS") ","}}
+{{range $index,$peer := $peers}}{{if $index}},
+{{end}}"{{.}}"{{end}}
+]
+{{end}}
+
+{{if (getenv "NODE_SEED")}}
+NODE_SEED="{{getenv "NODE_SEED"}}"
+{{end}}
+
+{{if (getenv "NODE_IS_VALIDATOR")}}
+NODE_IS_VALIDATOR={{getenv "NODE_IS_VALIDATOR"}}
+{{end}}
+
+{{if (getenv "DESIRED_BASE_FEE")}}
+DESIRED_BASE_FEE={{getenv "DESIRED_BASE_FEE"}}
+{{end}}
+
+{{if (getenv "DESIRED_MAX_TX_PER_LEDGER")}}
+DESIRED_MAX_TX_PER_LEDGER={{getenv "DESIRED_MAX_TX_PER_LEDGER"}}
+{{end}}
+
+{{if (getenv "FAILURE_SAFETY")}}
+FAILURE_SAFETY={{getenv "FAILURE_SAFETY"}}
+{{end}}
+
+{{if (getenv "UNSAFE_QUORUM")}}
+UNSAFE_QUORUM={{getenv "UNSAFE_QUORUM"}}
+{{end}}
+
+{{if (getenv "CATCHUP_COMPLETE")}}
+CATCHUP_COMPLETE={{getenv "CATCHUP_COMPLETE"}}
+{{end}}
+
+{{if (getenv "CATCHUP_RECENT")}}
+CATCHUP_RECENT={{getenv "CATCHUP_RECENT"}}
+{{end}}
+
+{{if (getenv "MAX_CONCURRENT_SUBPROCESSES")}}
+MAX_CONCURRENT_SUBPROCESSES={{getenv "MAX_CONCURRENT_SUBPROCESSES"}}
+{{end}}
+
+{{if (getenv "RUN_STANDALONE")}}
+RUN_STANDALONE={{getenv "RUN_STANDALONE"}}
+{{end}}
+
+{{if (getenv "INVARIANT_CHECK_BALANCE")}}
+INVARIANT_CHECK_BALANCE={{getenv "INVARIANT_CHECK_BALANCE"}}
+{{end}}
+
+{{if (getenv "INVARIANT_CHECK_ACCOUNT_SUBENTRY_COUNT")}}
+INVARIANT_CHECK_ACCOUNT_SUBENTRY_COUNT={{getenv "INVARIANT_CHECK_ACCOUNT_SUBENTRY_COUNT"}}
+{{end}}
+
+{{if (getenv "INVARIANT_CHECK_CACHE_CONSISTENT_WITH_DATABASE")}}
+INVARIANT_CHECK_CACHE_CONSISTENT_WITH_DATABASE={{getenv "INVARIANT_CHECK_CACHE_CONSISTENT_WITH_DATABASE"}}
+{{end}}
+
+{{if (getenv "MANUAL_CLOSE")}}
+MANUAL_CLOSE={{getenv "MANUAL_CLOSE"}}
+{{end}}
+
+{{if (getenv "ARTIFICIALLY_GENERATE_LOAD_FOR_TESTING")}}
+ARTIFICIALLY_GENERATE_LOAD_FOR_TESTING={{getenv "ARTIFICIALLY_GENERATE_LOAD_FOR_TESTING"}}
+{{end}}
+
+{{if (getenv "ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING")}}
+ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING={{getenv "ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING"}}
+{{end}}
+
+{{if (getenv "ARTIFICIALLY_SET_CLOSE_TIME_FOR_TESTING")}}
+ARTIFICIALLY_SET_CLOSE_TIME_FOR_TESTING={{getenv "ARTIFICIALLY_SET_CLOSE_TIME_FOR_TESTING"}}
+{{end}}
+
+{{if (getenv "ALLOW_LOCALHOST_FOR_TESTING")}}
+ALLOW_LOCALHOST_FOR_TESTING={{getenv "ALLOW_LOCALHOST_FOR_TESTING"}}
+{{end}}
+
+{{if (getenv "HISTORY")}}
+{{$histories := json (getenv "HISTORY")}}
+{{range $name,$history := $histories}}
+[HISTORY.{{$name}}]
+{{if $history.get}}get="{{$history.get}}"{{end}}
+{{if $history.put}}put="{{$history.put}}"{{end}}
+{{end}}
+{{end}}
+
+{{if (getenv "QUORUM_SET")}}
+{{$quorum_sets := jsonArray (getenv "QUORUM_SET")}}
+{{range $quorum_set := $quorum_sets}}
+[QUORUM_SET{{if $quorum_set.path}}.{{$quorum_set.path}}{{end}}]
+{{if $quorum_set.threshold_percent}}THRESHOLD_PERCENT={{$quorum_set.threshold_percent}}{{end}}
+VALIDATORS=[
+{{range $index,$validator := $quorum_set.validators}}{{if $index}},
+{{end}}"{{.}}"{{end}}
+]
+{{end}}
+{{end}}
