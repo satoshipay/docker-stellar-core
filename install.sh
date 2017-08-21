@@ -16,6 +16,10 @@ make -j 4
 make install
 cd ..
 
+#install the aws-cli
+apt-get -y install python-pip
+pip install awscli
+
 # install confd for config file management
 wget -nv -O /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64
 chmod +x /usr/local/bin/confd

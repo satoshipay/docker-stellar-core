@@ -64,6 +64,23 @@ ones you probably want to set:
    ]
    ```
 
+### AWS History Archive
+To use aws as archive destination, add a history destination of the following form:
+```
+   {
+     "h2": {
+       "get": "curl http://history.stellar.org/{0} -o {1}",
+       "put": "aws s3 cp {0} s3://history.stellar.org/{1}"
+     }
+   }
+```
+
+and set the appropriate environment variables for the aws cli. Some examples are:
+* `AWS_ACCESS_KEY_ID`: AWS access key.
+* `AWS_SECRET_ACCESS_KEY`: AWS secret key. Access and secret key variables override credentials stored in credential and config files.
+the full list of environment variables available for the aws cli can be found here: http://docs.aws.amazon.com/cli/latest/userguide/cli-environment.html
+
+
 ### Initialization
 
 You need to initialize the Stellar Core database before you can actually run the daemon.
