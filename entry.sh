@@ -6,9 +6,9 @@ confd -onetime -backend env -log-level error
 
 exec "$@"
 
-init_stellar_core
+stellar_core_init_db
 
-function init_stellar_core() {
+function stellar_core_init_db() {
 	if [ -f /.db-initialized ]; then
 		echo "core: already initialized"
 		return 0
