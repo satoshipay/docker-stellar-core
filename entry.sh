@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+DB_INITIALIZED="/data/.db-initialized"
+
 function stellar_core_init_db() {
-	if [ -f /.db-initialized ]; then
+	if [ -f $DB_INITIALIZED ]; then
 		echo "core db already initialized. continuing on..."
 		return 0
 	fi
@@ -12,7 +14,7 @@ function stellar_core_init_db() {
 
 	echo "finished initializing core db"
 
-	touch /.db-initialized
+	touch $DB_INITIALIZED
 }
 
 set -ue
