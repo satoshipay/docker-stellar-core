@@ -12,7 +12,7 @@ git clone --branch $STELLAR_CORE_VERSION --recursive --depth 1 https://github.co
 cd stellar-core
 ./autogen.sh
 ./configure
-make -j 4
+make
 make install
 cd ..
 

@@ -63,12 +63,3 @@ ones you probably want to set:
      }
    ]
    ```
-
-### Initialization
-
-You need to initialize the Stellar Core database before you can actually run the daemon.
-Make sure to run `stellar-core -newdb` with the same environment variables you use for running the daemon:
-
-```
-docker run --rm -e DATABASE=your-db-string [-e ...] stellar-core stellar-core -newdb
-```
