@@ -79,13 +79,3 @@ and set the appropriate environment variables for the aws cli. Some examples are
 * `AWS_ACCESS_KEY_ID`: AWS access key.
 * `AWS_SECRET_ACCESS_KEY`: AWS secret key. Access and secret key variables override credentials stored in credential and config files.
 the full list of environment variables available for the aws cli can be found here: http://docs.aws.amazon.com/cli/latest/userguide/cli-environment.html
-
-
-### Initialization
-
-You need to initialize the Stellar Core database before you can actually run the daemon.
-Make sure to run `stellar-core -newdb` with the same environment variables you use for running the daemon:
-
-```
-docker run --rm -e DATABASE=your-db-string [-e ...] stellar-core stellar-core -newdb
-```
