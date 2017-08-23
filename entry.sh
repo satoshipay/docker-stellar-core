@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+DB_INITIALIZED="/data/.db-initialized"
+
+function stellar_core_newdb() {
+	if [ -f $DB_INITIALIZED ]; then
+		echo "core db already initialized. continuing on..."
+		return 0
+	fi
+
+	echo "initializing core db..."
+
+	stellar-core --conf /stellar-core.cfg -newdb
+
+	echo "finished initializing core db"
+
+	touch $DB_INITIALIZED
+}
+
 function stellar_core_newhist() {
 	if [ -f /data/.newhist-$1 ]; then
 		echo "history archive named $1 is already newed up."
@@ -18,6 +35,8 @@ function stellar_core_newhist() {
 set -ue
 
 confd -onetime -backend env -log-level error
+
+stellar_core_newdb
 
 jq -c 'keys[]' $HISTORY | while read archive_name; do
     if [ jq '[$archive_name] | has("put")' ]; then
