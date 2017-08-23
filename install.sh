@@ -7,7 +7,7 @@ apt-get update
 apt-get install -y $STELLAR_CORE_BUILD_DEPS
 
 # install jq to parse json environment variables
-apt-get install jq
+apt-get -y install jq
 
 # clone, compile, and install stellar core
 git clone --branch $STELLAR_CORE_VERSION --recursive --depth 1 https://github.com/stellar/stellar-core.git
