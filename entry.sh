@@ -43,7 +43,7 @@ stellar_core_init_db
 
 #attempt to new any history archives that have not yet been newed.
 jq -c 'keys[]' $HISTORY | while read archive_name; do
-    if [ jq '[$archive_name] | has("put")' ]; then
+    if "$(echo "$archive_name" | jq 'has("put")')" == "true"; then
         stellar_core_newhist $archive_name
     fi
 done
