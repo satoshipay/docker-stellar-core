@@ -2,6 +2,10 @@
 
 [![Docker Build Status](https://img.shields.io/docker/build/satoshipay/stellar-core.svg)]()
 
+## Docker Hub
+
+The Docker images are automatically built and published at [satoshipay/stellar-core](https://hub.docker.com/r/satoshipay/stellar-core/).
+
 ## Configuration
 
 The container can be fully configured via environment variables.
@@ -10,7 +14,7 @@ The container can be fully configured via environment variables.
 
 If you don't have a node seed yet you can create one by running
 ```
-docker run --rm -it stellar-core stellar-core --genseed
+docker run --rm -it --entrypoint '' satoshipay/stellar-core stellar-core --genseed
 ```
 Use the *Secret seed* **only** for the `NODE_SEED` env variable and tell other nodes
 your *Public* key.
