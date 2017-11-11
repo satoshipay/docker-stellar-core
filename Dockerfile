@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 # git tag from https://github.com/stellar/stellar-core
-ARG STELLAR_CORE_VERSION="v0.6.3"
+ARG STELLAR_CORE_VERSION="v0.6.4"
 ARG STELLAR_CORE_BUILD_DEPS="git build-essential pkg-config autoconf automake libtool bison flex libpq-dev wget"
 ARG STELLAR_CORE_DEPS="curl libpq5"
 ARG CONFD_VERSION="0.12.0"
