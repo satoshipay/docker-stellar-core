@@ -1,5 +1,7 @@
 # Stellar Core Docker image
 
+[![Docker Build Status](https://img.shields.io/docker/build/satoshipay/stellar-core.svg)]()
+
 ## Configuration
 
 The container can be fully configured via environment variables.
