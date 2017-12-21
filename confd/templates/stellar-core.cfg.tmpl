@@ -17,10 +17,6 @@ COMMANDS=[{{$commands := split (getenv "COMMANDS") ","}}
 ]
 {{end}}
 
-{{if (getenv "PREFERRED_UPGRADE_DATETIME")}}
-PREFERRED_UPGRADE_DATETIME={{getenv "PREFERRED_UPGRADE_DATETIME"}}
-{{end}}
-
 {{if (getenv "NODE_NAMES")}}
 NODE_NAMES=[{{$names := split (getenv "NODE_NAMES") ","}}
 {{range $index,$name := $names}}{{if $index}},
@@ -75,14 +71,6 @@ NODE_SEED="{{getenv "NODE_SEED"}}"
 
 {{if (getenv "NODE_IS_VALIDATOR")}}
 NODE_IS_VALIDATOR={{getenv "NODE_IS_VALIDATOR"}}
-{{end}}
-
-{{if (getenv "DESIRED_BASE_FEE")}}
-DESIRED_BASE_FEE={{getenv "DESIRED_BASE_FEE"}}
-{{end}}
-
-{{if (getenv "DESIRED_MAX_TX_PER_LEDGER")}}
-DESIRED_MAX_TX_PER_LEDGER={{getenv "DESIRED_MAX_TX_PER_LEDGER"}}
 {{end}}
 
 {{if (getenv "FAILURE_SAFETY")}}
