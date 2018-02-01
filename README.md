@@ -1,6 +1,6 @@
 # Stellar Core Docker image
 
-[![Docker Build Status](https://img.shields.io/docker/build/satoshipay/stellar-core.svg)](https://hub.docker.com/r/satoshipay/stellar-core/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/satoshipay/stellar-core.svg)](https://hub.docker.com/r/satoshipay/stellar-core/)
 
 ## Docker Hub
 
