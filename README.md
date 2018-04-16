@@ -8,7 +8,11 @@ The Docker images are automatically built and published at [satoshipay/stellar-c
 
 ## Configuration
 
-The container can be fully configured via environment variables.
+The container can be fully configured via environment variables, see below.
+
+There is also an [example Docker Compose config](docker-compose.example.yml) – just run
+`docker-compose -f docker-compose.example.yml` to get a functional node.
+**Make sure to use a new `NODE_SEED` if you intend to run this in production!**
 
 ### Create node seed
 

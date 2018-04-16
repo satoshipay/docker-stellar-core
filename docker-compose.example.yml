@@ -1,0 +1,114 @@
+# example docker compose file for how to run stellar core
+version: '3'
+services:
+  stellar-core-postgres:
+    image: postgres:9
+    restart: on-failure
+    environment:
+      - POSTGRES_DB=stellar-core
+
+  stellar-core:
+    image: satoshipay/stellar-core:9.2.0
+    restart: always
+    ports:
+    - 11625:11625
+    - 11626:11626
+    environment:
+      - DATABASE=postgresql://dbname=stellar-core user=postgres host=stellar-core-postgres
+      # WARNING: make sure to use a new NODE_SEED!
+      # public key GD4E3XVLEBB4JMR7KNNMTSGXIKOK56ZZXX764KEPKE4IR73DEG6O22SI
+      - NODE_SEED=SCBQ3PUIFODWT3IH2H36IB7ZWT2FKNZQTS6ZZ3QIXS63IFIXZEGRTBUM my_stellar_node
+      - NODE_IS_VALIDATOR=true
+      - NETWORK_PASSPHRASE=Public Global Stellar Network ; September 2015
+      - CATCHUP_RECENT=60480
+      - MAX_PEER_CONNECTIONS=30
+      - "KNOWN_PEERS=\
+        au.stellar.ibm.com,\
+        br.stellar.ibm.com,\
+        ca.stellar.ibm.com,\
+        no.stellar.ibm.com,\
+        it.stellar.ibm.com,\
+        hk.stellar.ibm.com,\
+        in.stellar.ibm.com,\
+        uk.stellar.ibm.com,\
+        us.stellar.ibm.com,\
+        stellar1.satoshipay.io,\
+        stellar2.satoshipay.io,\
+        stellar3.satoshipay.io,\
+        core-live-a.stellar.org,\
+        core-live-b.stellar.org,\
+        core-live-c.stellar.org"
+      - "PREFERRED_PEERS=\
+        au.stellar.ibm.com,\
+        br.stellar.ibm.com,\
+        ca.stellar.ibm.com,\
+        no.stellar.ibm.com,\
+        it.stellar.ibm.com,\
+        hk.stellar.ibm.com,\
+        in.stellar.ibm.com,\
+        uk.stellar.ibm.com,\
+        us.stellar.ibm.com,\
+        stellar1.satoshipay.io,\
+        stellar2.satoshipay.io,\
+        stellar3.satoshipay.io,\
+        core-live-a.stellar.org,\
+        core-live-b.stellar.org,\
+        core-live-c.stellar.org"
+      - "NODE_NAMES=\
+        GCKWUQGSVO45ZV3QK7POYL7HMFWDKWJVMFVEGUJKCAEVUITUCTQWFSM6 ibm_au,\
+        GBUJA3Z5TLAKLI5MEH4TETLXJBQVSVW74MNEKP5UUHTP3IMLNSUPOTVA ibm_br,\
+        GB2HF2NHRKKFZYFDGD7MUENOYROOEK7SWYV2APYOODP6P7BUJTLILKIL ibm_ca,\
+        GDRA72H7JWXAXWJKOONQOPH3JKNSH5MQ6BO5K74C3X6FO2G3OG464BPU ibm_no,\
+        GAEEH4TBR7YQQWKJ2FIT57HXZZTMK2BX5LY4POJUYFSEZ7Y2ONHPPTES ibm_it,\
+        GBJ7T3BTLX2BP3T5Q4256PUF7JMDAB35LLO32QRDYE67TDDMN7H33GGE ibm_hk,\
+        GCH3O5PTCZVR4G65W3B4XDKWI5V677HQB3QO7CW4YPVYDDFBE2GE7G6V ibm_in,\
+        GAENPO2XRTTMAJXDWM3E3GAALNLG4HVMKJ4QF525TR25RI42YPEDULOW ibm_uk,\
+        GARBCBH4YSHUJLYEPKEPMVYZIJ3ZSQR3QCJ245CWGY64X72JLN4A6RSG ibm_us,\
+        GC5SXLNAM3C4NMGK2PXK4R34B5GNZ47FYQ24ZIBFDFOCU6D4KBN4POAE satoshipay1,\
+        GBJQUIXUO4XSNPAUT6ODLZUJRV2NPXYASKUBY4G5MYP3M47PCVI55MNT satoshipay2,\
+        GAK6Z5UVGUVSEK6PEOCAYJISTT5EJBB34PN3NOLEQG2SUKXRVV2F6HZY satoshipay3,\
+        GCGB2S2KGYARPVIA37HYZXVRM2YZUEXA6S33ZU5BUDC6THSB62LZSTYH sdf_watcher1,\
+        GCM6QMP3DLRPTAZW2UZPCPX2LF3SXWXKPMP3GKFZBDSF3QZGV2G5QSTK sdf_watcher2,\
+        GABMKJM6I25XI4K7U6XWMULOUQIQ27BCTMLS6BYYSOWKTBUXVRJSXHYQ sdf_watcher3"
+      # this is just an example quorum set – you most likely want to change it
+      - >-
+          QUORUM_SET=[
+            {
+              "threshold_percent": 66,
+              "validators": [
+                "$$satoshipay1",
+                "$$satoshipay2",
+                "$$satoshipay3"
+              ]
+            },
+            {
+              "path": "ibm",
+              "threshold_percent": 51,
+              "validators": [
+                "$$ibm_au",
+                "$$ibm_br",
+                "$$ibm_ca",
+                "$$ibm_no",
+                "$$ibm_it",
+                "$$ibm_hk",
+                "$$ibm_in",
+                "$$ibm_uk",
+                "$$ibm_us"
+              ]
+            },
+            {
+              "path": "sdf",
+              "threshold_percent": 51,
+              "validators": [
+                "$$sdf_watcher1",
+                "$$sdf_watcher2",
+                "$$sdf_watcher3"
+              ]
+            }
+          ]
+      - >-
+          HISTORY={
+            "sdf1": {"get": "curl -sf http://history.stellar.org/prd/core-live/core_live_001/{0} -o {1}"},
+            "sdf2": {"get": "curl -sf http://history.stellar.org/prd/core-live/core_live_002/{0} -o {1}"},
+            "sdf3": {"get": "curl -sf http://history.stellar.org/prd/core-live/core_live_003/{0} -o {1}"}
+          }
