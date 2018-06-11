@@ -2,7 +2,11 @@ LOG_FILE_PATH="{{getenv "LOG_FILE_PATH"}}"
 
 BUCKET_DIR_PATH="/data/buckets"
 
+{{if (getenv "DATABASE_PASSWORD")}}
+DATABASE="{{replace (getenv "DATABASE") "DATABASE_PASSWORD" (getenv "DATABASE_PASSWORD") -1}}"
+{{else}}
 DATABASE="{{getenv "DATABASE"}}"
+{{end}}
 
 HTTP_PORT=11626
 

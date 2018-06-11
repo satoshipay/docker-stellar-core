@@ -8,13 +8,14 @@ services:
       - POSTGRES_DB=stellar-core
 
   stellar-core:
-    image: satoshipay/stellar-core:9.2.0
+    image: satoshipay/stellar-core:9.2.0-1
     restart: always
     ports:
     - 11625:11625
     - 11626:11626
     environment:
-      - DATABASE=postgresql://dbname=stellar-core user=postgres host=stellar-core-postgres
+      - DATABASE=postgresql://dbname=stellar-core user=postgres password=DATABASE_PASSWORD host=stellar-core-postgres
+      - DATABASE_PASSWORD=2aq853RGDqdHAWFwGDSGGRIUP9VzJJsh
       # WARNING: make sure to use a new NODE_SEED!
       # public key GD4E3XVLEBB4JMR7KNNMTSGXIKOK56ZZXX764KEPKE4IR73DEG6O22SI
       - NODE_SEED=SCBQ3PUIFODWT3IH2H36IB7ZWT2FKNZQTS6ZZ3QIXS63IFIXZEGRTBUM my_stellar_node
