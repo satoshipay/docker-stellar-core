@@ -11,7 +11,7 @@ The Docker images are automatically built and published at [satoshipay/stellar-c
 The container can be fully configured via environment variables, see below.
 
 There is also an [example Docker Compose config](docker-compose.example.yml) – just run
-`docker-compose -f docker-compose.example.yml` to get a functional node.
+`docker-compose -f docker-compose.example.yml up` to get a functional node.
 **Make sure to use a new `NODE_SEED` if you intend to run this in production!**
 
 ### Create node seed
@@ -34,7 +34,13 @@ ones you probably want to set:
   is the public production network; use `Test SDF Network ; September 2015` for the testnet.
 
 * `DATABASE`: default is `sqlite3://stellar.db` which you should definitely change for production,
-   e.g., `postgresql://dbname=stellar user=postgres host=postgres`.
+   e.g., `postgresql://dbname=stellar user=postgres host=postgres` or
+   `postgresql://dbname=stellar user=postgres password=DATABASE_PASSWORD host=postgres`
+   (see `DATABASE_PASSWORD`).
+
+* `DATABASE_PASSWORD`: if provided, the string `DATABASE_PASSWORD` in the `DATABASE`
+   variable is replace with its value. This is useful for providing passwords separately,
+   e.g., via secrets in Kubernetes.
 
 * `KNOWN_PEERS`: comma-separated list of peers (`ip:port`) to connect to when
    below *TARGET_PEER_CONNECTIONS*, e.g.,
