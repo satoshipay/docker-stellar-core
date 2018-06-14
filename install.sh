@@ -25,6 +25,16 @@ rm -rf stellar-core
 apt-get remove -y $STELLAR_CORE_BUILD_DEPS
 apt-get autoremove -y
 
+# install gcloud and gsutil
+apt-get update -qq
+apt-get install lsb-release curl -y
+export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+echo "CLOUD_SDK_REPO: $CLOUD_SDK_REPO"
+echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+apt-get update -qq
+apt-get install google-cloud-sdk -qqy
+
 # install deps
 apt-get install -y $STELLAR_CORE_DEPS
 

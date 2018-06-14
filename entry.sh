@@ -19,8 +19,18 @@ function stellar_core_init_db() {
   touch $DB_INITIALIZED
 }
 
+function setup_gsutil() {
+  if [ -n "$GS_SERVICE_ACCOUNT_KEY" ]; then
+    echo "Setting up gsutil: writing contents of GS_SERVICE_ACCOUNT_KEY into /tmp/gcloud-key.json..."
+    echo $GS_SERVICE_ACCOUNT_KEY > /tmp/gcloud-key.json
+    gcloud auth activate-service-account --key-file /tmp/gcloud-key.json
+    echo "gsutil configured"
+  fi
+}
+
 confd -onetime -backend env -log-level error
 
 stellar_core_init_db
+setup_gsutil
 
 exec "$@"

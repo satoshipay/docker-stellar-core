@@ -79,3 +79,23 @@ ones you probably want to set:
      }
    ]
    ```
+
+* `GS_SERVICE_ACCOUNT_KEY`: if you use Google Storage to write history, set this to your service account key:
+  ```json
+  {
+    "type": "service_account",
+    "project_id": "project-name",
+    "private_key_id": "0n7n7cnqp84489",
+    "private_key": "-----BEGIN PRIVATE KEY-----..."
+  }
+  ```
+
+  Your history can then have something like this for read/write:
+
+  ```json
+  {
+    "local": {
+      "get": "/gsutil cp gs://bucket-name/prod/01/{0} {1}",
+      "put": "/gsutil cp {0} gs://bucket-name/prod/01/{1}"
+  }
+  ```
