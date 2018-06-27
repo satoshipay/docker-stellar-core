@@ -3,7 +3,7 @@ FROM debian:stretch
 # git tag from https://github.com/stellar/stellar-core
 ARG STELLAR_CORE_VERSION="v9.2.0"
 ARG STELLAR_CORE_BUILD_DEPS="git build-essential pkg-config autoconf automake libtool bison flex libpq-dev wget pandoc"
-ARG STELLAR_CORE_DEPS="curl libpq5"
+ARG STELLAR_CORE_DEPS="curl jq libpq5"
 ARG CONFD_VERSION="0.12.0"
 
 LABEL maintainer="hello@satoshipay.io"
@@ -27,6 +27,7 @@ ENV \
   HTTP_MAX_CLIENT="128" \
   NETWORK_PASSPHRASE="Public Global Stellar Network ; September 2015"
 
+ADD ready.sh /
 ADD confd /etc/confd
 
 ADD entry.sh /
