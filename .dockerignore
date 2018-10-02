@@ -1,0 +1,4 @@
+*
+!*.sh
+build.sh
+!confd
