@@ -6,21 +6,46 @@ function stellar_core_init_db() {
   local DB_INITIALIZED="/data/.db-initialized"
 
   if [ -f $DB_INITIALIZED ]; then
-    echo "core db already initialized. continuing on..."
+    echo "Core db has already been initialized."
     return 0
   fi
 
-  echo "initializing core db..."
+  echo "Initializing core db..."
 
-  stellar-core --conf /stellar-core.cfg -newdb
+  stellar-core --conf /stellar-core.cfg --newdb
 
-  echo "finished initializing core db"
+  echo "Finished initializing core db"
 
   touch $DB_INITIALIZED
+}
+
+function stellar_core_init_history_archives() {
+  if [ -z ${INITIALIZE_HISTORY_ARCHIVES:-} ] || [ "${INITIALIZE_HISTORY_ARCHIVES}" != "true" ]; then
+    echo "Not initializing history archives (set INITIALIZE_HISTORY_ARCHIVES=true if you want to initialize them)."
+    return 0
+  fi
+
+  for HISTORY_ARCHIVE in $(echo $HISTORY | jq -r 'to_entries[] | select (.value.put?) | .key'); do
+    local HISTORY_ARCHIVE_INITIALIZED="/data/.history-archive-${HISTORY_ARCHIVE}-initialized"
+
+    if [ -f $HISTORY_ARCHIVE_INITIALIZED ]; then
+      echo "History archive ${HISTORY_ARCHIVE} has already been initialized."
+      continue
+    fi
+
+    echo "Initializing history archive ${HISTORY_ARCHIVE}..."
+
+    stellar-core --conf /stellar-core.cfg --newhist $HISTORY_ARCHIVE
+
+    echo "Finished initializing history archive ${HISTORY_ARCHIVE}."
+
+    touch $HISTORY_ARCHIVE_INITIALIZED
+  done
 }
 
 confd -onetime -backend env -log-level error
 
 stellar_core_init_db
+stellar_core_init_history_archives
 
 exec "$@"
