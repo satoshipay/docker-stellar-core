@@ -59,6 +59,12 @@ ones you probably want to set:
      }
    }
    ```
+
+* `INITIALIZE_HISTORY_ARCHIVES`: if set to `true` the history archives with a `put` command
+  will be initialized if they haven't been initialized yet. Note: detecting whether
+  an archive has already been initialized is done via checking a file in the `/data` volume
+  so the archive will be re-initialized when the volume is recreated.
+
 * `NODE_NAMES`: comma-separated list of nodes with names (e.g., for using them in `QUORUM_SET`), for example:
    ```
    GCGB2S2KGYARPVIA37HYZXVRM2YZUEXA6S33ZU5BUDC6THSB62LZSTYH  sdf_watcher1,GCM6QMP3DLRPTAZW2UZPCPX2LF3SXWXKPMP3GKFZBDSF3QZGV2G5QSTK  sdf_watcher2,GABMKJM6I25XI4K7U6XWMULOUQIQ27BCTMLS6BYYSOWKTBUXVRJSXHYQ  sdf_watcher3
