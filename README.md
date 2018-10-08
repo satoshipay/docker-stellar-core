@@ -10,6 +10,7 @@ and come in multiple flavors that are available as tags:
  * Vanilla: just Stellar Core, example tags are `10.0.0` or `latest`.
  * AWS: comes with AWS CLI installed, example tags are `10.0.0-aws` or `latest-aws`.
  * Google Cloud: comes with Google Cloud SDK installed, example tags are `10.0.0-gcloud` or `latest-gcloud`.
+   A Service Account is automatically configured if a key is provided via `GCLOUD_SERVICE_ACCOUNT_KEY`.
 
 ## Configuration
 
