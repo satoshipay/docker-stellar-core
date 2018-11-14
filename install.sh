@@ -7,7 +7,7 @@ apt-get update
 apt-get install -y $STELLAR_CORE_BUILD_DEPS
 
 # clone, compile, and install stellar core
-git clone --branch $STELLAR_CORE_VERSION --recursive --depth 1 https://github.com/stellar/stellar-core.git
+git clone --branch $STELLAR_CORE_VERSION --recursive --depth 1 https://github.com/vogel/stellar-core.git
 
 cd stellar-core
 ./autogen.sh
