@@ -25,7 +25,8 @@ EXPOSE 11626
 ENV \
   DATABASE="sqlite3:///data/stellar.db" \
   HTTP_MAX_CLIENT="128" \
-  NETWORK_PASSPHRASE="Public Global Stellar Network ; September 2015"
+  NETWORK_PASSPHRASE="Public Global Stellar Network ; September 2015" \
+  INITIALIZE_DB=true
 
 ADD ready.sh /
 ADD confd /etc/confd

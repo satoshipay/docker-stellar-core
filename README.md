@@ -61,6 +61,11 @@ ones you probably want to set:
    }
    ```
 
+* `INITIALIZE_DB` (default `true`): if set to `true` initializes the database if it hasn't
+  been initialized before. Note: detecting whether the database has already been initialized
+  is done via checking a file in the `/data` volume so the database will be re-initialized
+  when the volume is recreated.
+
 * `INITIALIZE_HISTORY_ARCHIVES`: if set to `true` the history archives with a `put` command
   will be initialized if they haven't been initialized yet. Note: detecting whether
   an archive has already been initialized is done via checking a file in the `/data` volume

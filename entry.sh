@@ -3,6 +3,11 @@
 set -ue
 
 function stellar_core_init_db() {
+  if [ -z ${INITIALIZE_DB:-} ] || [ "${INITIALIZE_DB}" != "true" ]; then
+    echo "Not initializing DB (set INITIALIZE_DB=true if you want to initialize it)."
+    return 0
+  fi
+
   local DB_INITIALIZED="/data/.db-initialized"
 
   if [ -f $DB_INITIALIZED ]; then
