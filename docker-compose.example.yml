@@ -8,7 +8,7 @@ services:
       - POSTGRES_DB=stellar-core
 
   stellar-core:
-    image: satoshipay/stellar-core:10.0.0
+    image: satoshipay/stellar-core:10.1.0
     restart: always
     ports:
     - 11625:11625
@@ -28,14 +28,12 @@ services:
         br.stellar.ibm.com,\
         ca.stellar.ibm.com,\
         no.stellar.ibm.com,\
-        it.stellar.ibm.com,\
-        hk.stellar.ibm.com,\
         in.stellar.ibm.com,\
         uk.stellar.ibm.com,\
         us.stellar.ibm.com,\
-        stellar1.satoshipay.io,\
-        stellar2.satoshipay.io,\
-        stellar3.satoshipay.io,\
+        stellar-de-fra.satoshipay.io,\
+        stellar-sg-sin.satoshipay.io,\
+        stellar-us-iowa.satoshipay.io,\
         core-live-a.stellar.org,\
         core-live-b.stellar.org,\
         core-live-c.stellar.org"
@@ -44,14 +42,12 @@ services:
         br.stellar.ibm.com,\
         ca.stellar.ibm.com,\
         no.stellar.ibm.com,\
-        it.stellar.ibm.com,\
-        hk.stellar.ibm.com,\
         in.stellar.ibm.com,\
         uk.stellar.ibm.com,\
         us.stellar.ibm.com,\
-        stellar1.satoshipay.io,\
-        stellar2.satoshipay.io,\
-        stellar3.satoshipay.io,\
+        stellar-de-fra.satoshipay.io,\
+        stellar-sg-sin.satoshipay.io,\
+        stellar-us-iowa.satoshipay.io,\
         core-live-a.stellar.org,\
         core-live-b.stellar.org,\
         core-live-c.stellar.org"
@@ -60,14 +56,12 @@ services:
         GBUJA3Z5TLAKLI5MEH4TETLXJBQVSVW74MNEKP5UUHTP3IMLNSUPOTVA ibm_br,\
         GB2HF2NHRKKFZYFDGD7MUENOYROOEK7SWYV2APYOODP6P7BUJTLILKIL ibm_ca,\
         GDRA72H7JWXAXWJKOONQOPH3JKNSH5MQ6BO5K74C3X6FO2G3OG464BPU ibm_no,\
-        GAEEH4TBR7YQQWKJ2FIT57HXZZTMK2BX5LY4POJUYFSEZ7Y2ONHPPTES ibm_it,\
-        GBJ7T3BTLX2BP3T5Q4256PUF7JMDAB35LLO32QRDYE67TDDMN7H33GGE ibm_hk,\
         GCH3O5PTCZVR4G65W3B4XDKWI5V677HQB3QO7CW4YPVYDDFBE2GE7G6V ibm_in,\
         GAENPO2XRTTMAJXDWM3E3GAALNLG4HVMKJ4QF525TR25RI42YPEDULOW ibm_uk,\
         GARBCBH4YSHUJLYEPKEPMVYZIJ3ZSQR3QCJ245CWGY64X72JLN4A6RSG ibm_us,\
-        GC5SXLNAM3C4NMGK2PXK4R34B5GNZ47FYQ24ZIBFDFOCU6D4KBN4POAE satoshipay1,\
-        GBJQUIXUO4XSNPAUT6ODLZUJRV2NPXYASKUBY4G5MYP3M47PCVI55MNT satoshipay2,\
-        GAK6Z5UVGUVSEK6PEOCAYJISTT5EJBB34PN3NOLEQG2SUKXRVV2F6HZY satoshipay3,\
+        GC5SXLNAM3C4NMGK2PXK4R34B5GNZ47FYQ24ZIBFDFOCU6D4KBN4POAE satoshipay-de-fra,\
+        GBJQUIXUO4XSNPAUT6ODLZUJRV2NPXYASKUBY4G5MYP3M47PCVI55MNT satoshipay-sg-sin,\
+        GAK6Z5UVGUVSEK6PEOCAYJISTT5EJBB34PN3NOLEQG2SUKXRVV2F6HZY satoshipay-us-iowa,\
         GCGB2S2KGYARPVIA37HYZXVRM2YZUEXA6S33ZU5BUDC6THSB62LZSTYH sdf_watcher1,\
         GCM6QMP3DLRPTAZW2UZPCPX2LF3SXWXKPMP3GKFZBDSF3QZGV2G5QSTK sdf_watcher2,\
         GABMKJM6I25XI4K7U6XWMULOUQIQ27BCTMLS6BYYSOWKTBUXVRJSXHYQ sdf_watcher3"
@@ -77,9 +71,9 @@ services:
             {
               "threshold_percent": 66,
               "validators": [
-                "$$satoshipay1",
-                "$$satoshipay2",
-                "$$satoshipay3"
+                "$$satoshipay-de-fra",
+                "$$satoshipay-sg-sin",
+                "$$satoshipay-us-iowa"
               ]
             },
             {
@@ -90,8 +84,6 @@ services:
                 "$$ibm_br",
                 "$$ibm_ca",
                 "$$ibm_no",
-                "$$ibm_it",
-                "$$ibm_hk",
                 "$$ibm_in",
                 "$$ibm_uk",
                 "$$ibm_us"
@@ -109,6 +101,9 @@ services:
           ]
       - >-
           HISTORY={
+            "satoshipay-de-fra": {"get": "curl -sf https://stellar-history-de-fra.satoshipay.io/{0} -o {1}"},
+            "satoshipay-sg-sin": {"get": "curl -sf https://stellar-history-sg-sin.satoshipay.io/{0} -o {1}"},
+            "satoshipay-us-iowa": {"get": "curl -sf https://stellar-history-us-iowa.satoshipay.io/{0} -o {1}"},
             "sdf1": {"get": "curl -sf http://history.stellar.org/prd/core-live/core_live_001/{0} -o {1}"},
             "sdf2": {"get": "curl -sf http://history.stellar.org/prd/core-live/core_live_002/{0} -o {1}"},
             "sdf3": {"get": "curl -sf http://history.stellar.org/prd/core-live/core_live_003/{0} -o {1}"}
