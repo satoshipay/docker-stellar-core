@@ -8,7 +8,7 @@ services:
       - POSTGRES_DB=stellar-core
 
   stellar-core:
-    image: satoshipay/stellar-core:10.1.0
+    image: satoshipay/stellar-core:10.2.0
     restart: always
     ports:
     - 11625:11625
@@ -22,7 +22,6 @@ services:
       - NODE_IS_VALIDATOR=true
       - NETWORK_PASSPHRASE=Public Global Stellar Network ; September 2015
       - CATCHUP_RECENT=60480
-      - MAX_PEER_CONNECTIONS=30
       - "KNOWN_PEERS=\
         au.stellar.ibm.com,\
         br.stellar.ibm.com,\
