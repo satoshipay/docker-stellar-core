@@ -44,6 +44,18 @@ MAX_ADDITIONAL_PEER_CONNECTIONS={{getenv "MAX_ADDITIONAL_PEER_CONNECTIONS"}}
 MAX_PENDING_CONNECTIONS={{getenv "MAX_PENDING_CONNECTIONS"}}
 {{end}}
 
+{{if (getenv "PEER_AUTHENTICATION_TIMEOUT")}}
+PEER_AUTHENTICATION_TIMEOUT={{getenv "PEER_AUTHENTICATION_TIMEOUT"}}
+{{end}}
+
+{{if (getenv "PEER_TIMEOUT")}}
+PEER_TIMEOUT={{getenv "PEER_TIMEOUT"}}
+{{end}}
+
+{{if (getenv "PEER_STRAGGLER_TIMEOUT")}}
+PEER_STRAGGLER_TIMEOUT={{getenv "PEER_STRAGGLER_TIMEOUT"}}
+{{end}}
+
 {{if (getenv "PREFERRED_PEERS")}}
 PREFERRED_PEERS=[{{$peers := split (getenv "PREFERRED_PEERS") ","}}
 {{range $index,$peer := $peers}}{{if $index}},
