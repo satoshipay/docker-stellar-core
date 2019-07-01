@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 # git tag from https://github.com/stellar/stellar-core
-ARG STELLAR_CORE_VERSION="v11.1.0"
+ARG STELLAR_CORE_VERSION="v11.2.0"
 ARG STELLAR_CORE_BUILD_DEPS="git build-essential pkg-config autoconf automake libtool bison flex libpq-dev wget pandoc"
 ARG STELLAR_CORE_DEPS="curl jq libpq5"
 ARG CONFD_VERSION="0.16.0"
@@ -34,4 +34,4 @@ ADD confd /etc/confd
 ADD entry.sh /
 ENTRYPOINT ["/entry.sh"]
 
-CMD ["/usr/local/bin/stellar-core", "--conf", "/stellar-core.cfg"]
+CMD ["/usr/local/bin/stellar-core", "run", "--conf", "/stellar-core.cfg"]
