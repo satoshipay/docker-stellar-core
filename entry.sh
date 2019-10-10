@@ -17,7 +17,7 @@ function stellar_core_init_db() {
 
   echo "Initializing core db..."
 
-  stellar-core new-db --conf /stellar-core.cfg
+  stellar-core new-db --conf /tmp/stellar-core.cfg
 
   echo "Finished initializing core db"
 
@@ -40,7 +40,7 @@ function stellar_core_init_history_archives() {
 
     echo "Initializing history archive ${HISTORY_ARCHIVE}..."
 
-    stellar-core new-hist $HISTORY_ARCHIVE --conf /stellar-core.cfg
+    stellar-core new-hist $HISTORY_ARCHIVE --conf /tmp/stellar-core.cfg
 
     echo "Finished initializing history archive ${HISTORY_ARCHIVE}."
 
