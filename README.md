@@ -24,7 +24,7 @@ There is also an [example Docker Compose config](docker-compose.example.yml) –
 
 If you don't have a node seed yet you can create one by running
 ```
-docker run --rm -it --entrypoint '' satoshipay/stellar-core stellar-core --genseed
+docker run --rm -it --entrypoint '' satoshipay/stellar-core stellar-core gen-seed
 ```
 Use the *Secret seed* **only** for the `NODE_SEED` env variable and tell other nodes
 your *Public* key.
