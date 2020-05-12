@@ -18,3 +18,6 @@ docker push ${REPO}:${TAG}-aws
 
 docker build --build-arg TAG=${TAG} -t ${REPO}:${TAG}-gcloud -f Dockerfile.gcloud .
 docker push ${REPO}:${TAG}-gcloud
+
+docker build --build-arg TAG=${TAG} -t ${REPO}:${TAG}-azure -f Dockerfile.azure .
+docker push ${REPO}:${TAG}-azure
