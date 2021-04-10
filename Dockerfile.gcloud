@@ -10,4 +10,4 @@ ADD entry.gcloud.sh /
 ADD uploadhistory.gcloud.sh /
 ENTRYPOINT ["/entry.gcloud.sh"]
 
-CMD ["/usr/local/bin/stellar-core", "run", "--conf", "/stellar-core.cfg"]
+CMD ["/usr/local/bin/stellar-core", "run", "--conf", "/tmp/stellar-core.cfg"]

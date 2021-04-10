@@ -34,4 +34,4 @@ ADD confd /etc/confd
 ADD entry.sh /
 ENTRYPOINT ["/entry.sh"]
 
-CMD ["/usr/local/bin/stellar-core", "run", "--conf", "/stellar-core.cfg"]
+CMD ["/usr/local/bin/stellar-core", "run", "--conf", "/tmp/stellar-core.cfg"]
